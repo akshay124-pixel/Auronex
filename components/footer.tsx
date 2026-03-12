@@ -27,7 +27,7 @@ export function Footer() {
               delivery, and building scalable digital operations.
             </p>
             <div className="mt-6 space-y-2 text-sm text-[var(--color-muted)]">
-              <p>akshaypratapsingh1244@gmail.com</p>
+              <p>auronexit@gmail.com</p>
               <p>+91 87553 80144</p>
               <p>Chandigarh</p>
             </div>
@@ -61,7 +61,7 @@ export function Footer() {
               LinkedIn
             </a>
             <a
-              href="mailto:akshaypratapsingh1244@gmail.com"
+              href="mailto:auronexit@gmail.com"
               className="text-link-smooth hover:text-white"
             >
               Email

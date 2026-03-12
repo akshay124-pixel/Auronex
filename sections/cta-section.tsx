@@ -77,7 +77,7 @@ export function CtaSection() {
                 systems, stronger delivery, and better business outcomes.
               </p>
               <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-                <Button href="mailto:akshaypratapsingh1244@gmail.com">Schedule a Consultation</Button>
+                <Button href="mailto:auronexit@gmail.com">Schedule a Consultation</Button>
                 <Button href="https://wa.me/918755380144" variant="secondary" target="_blank" rel="noreferrer">
                   WhatsApp Us
                 </Button>

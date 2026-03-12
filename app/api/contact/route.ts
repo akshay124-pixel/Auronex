@@ -63,7 +63,7 @@ export async function POST(request: Request) {
 
     const transporter = getTransporter();
 
-    const destination = process.env.CONTACT_TO || process.env.SMTP_USER;
+    const destination = process.env.SMTP_USER;
 
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
