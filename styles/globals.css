@@ -1,0 +1,249 @@
+@import "tailwindcss";
+
+:root {
+  --font-sans: var(--font-inter), sans-serif;
+  --color-bg: #020617;
+  --color-surface: #0f172a;
+  --color-text: #e2e8f0;
+  --color-muted: #94a3b8;
+  --color-accent: #00e5ff;
+  --color-border: rgba(148, 163, 184, 0.18);
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 460ms;
+  --duration-medium: 820ms;
+  --duration-slow: 1180ms;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(0, 229, 255, 0.08), transparent 22%),
+    radial-gradient(circle at 85% 20%, rgba(34, 211, 238, 0.1), transparent 18%),
+    linear-gradient(180deg, #020617 0%, #020817 45%, #030712 100%);
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), sans-serif;
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text);
+}
+
+::selection {
+  background: rgba(0, 229, 255, 0.25);
+  color: #f8fafc;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at center, black 45%, transparent 90%);
+  opacity: 0.2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: auto -10% -18rem auto;
+  width: 34rem;
+  height: 34rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.2), transparent 62%);
+  filter: blur(40px);
+  pointer-events: none;
+  animation: drift 18s ease-in-out infinite;
+}
+
+.premium-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.premium-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 10% 12%, rgba(0, 229, 255, 0.12), transparent 18%),
+    radial-gradient(circle at 90% 32%, rgba(14, 165, 233, 0.14), transparent 16%),
+    radial-gradient(circle at 52% 100%, rgba(255, 255, 255, 0.03), transparent 24%);
+  opacity: 0.9;
+}
+
+.section-reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0) scale(0.985);
+  filter: blur(10px);
+  animation: sectionReveal 1.15s var(--ease-premium) forwards;
+  will-change: transform, opacity, filter;
+}
+
+.delay-1 {
+  animation-delay: 0.12s;
+}
+
+.delay-2 {
+  animation-delay: 0.22s;
+}
+
+.delay-3 {
+  animation-delay: 0.32s;
+}
+
+.glass-orb {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.32), rgba(0, 229, 255, 0.08) 45%, transparent 72%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 0 50px rgba(0, 229, 255, 0.12);
+  animation: drift 22s cubic-bezier(0.37, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+.ambient-line {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 14rem;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0, 229, 255, 0), rgba(0, 229, 255, 0.8), rgba(0, 229, 255, 0));
+  filter: blur(0.2px);
+  opacity: 0.5;
+  animation: sweep 12s cubic-bezier(0.37, 0, 0.2, 1) infinite;
+  will-change: transform, opacity;
+}
+
+.interactive-smooth {
+  transition-property: transform, opacity, color, background-color, border-color, box-shadow, filter;
+  transition-duration: var(--duration-medium);
+  transition-timing-function: var(--ease-premium);
+  will-change: transform, box-shadow;
+}
+
+.interactive-smooth-soft {
+  transition-property: transform, opacity, color, background-color, border-color, box-shadow, filter;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-soft);
+}
+
+.interactive-card-smooth {
+  transition-property: transform, opacity, background-color, border-color, box-shadow, filter;
+  transition-duration: 1650ms;
+  transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform, box-shadow;
+}
+
+.nav-link-smooth {
+  position: relative;
+  transition: color var(--duration-medium) var(--ease-premium);
+}
+
+.nav-link-smooth::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.5rem;
+  width: 100%;
+  height: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, rgba(0, 229, 255, 0), rgba(0, 229, 255, 0.92), rgba(0, 229, 255, 0));
+  transition: transform var(--duration-slow) var(--ease-premium), opacity var(--duration-medium) var(--ease-premium);
+  opacity: 0.7;
+}
+
+.nav-link-smooth:hover::after {
+  transform: scaleX(1);
+}
+
+.text-link-smooth {
+  transition:
+    color var(--duration-medium) var(--ease-premium),
+    transform var(--duration-medium) var(--ease-premium),
+    opacity var(--duration-medium) var(--ease-premium);
+}
+
+.text-link-smooth:hover {
+  transform: translate3d(0, -1px, 0);
+}
+
+.field-smooth {
+  transition:
+    border-color var(--duration-medium) var(--ease-premium),
+    background-color var(--duration-medium) var(--ease-premium),
+    box-shadow var(--duration-slow) var(--ease-premium),
+    transform var(--duration-medium) var(--ease-premium);
+}
+
+.field-smooth:hover,
+.field-smooth:focus {
+  transform: translate3d(0, -1px, 0);
+}
+
+@keyframes sectionReveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.985);
+    filter: blur(10px);
+  }
+  65% {
+    opacity: 1;
+    transform: translate3d(0, -2px, 0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) scale(1.02);
+  }
+}
+
+@keyframes sweep {
+  0% {
+    transform: translate3d(-18%, 0, 0);
+    opacity: 0;
+  }
+  18%,
+  82% {
+    opacity: 0.58;
+  }
+  100% {
+    transform: translate3d(150%, 0, 0);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
