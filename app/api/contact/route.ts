@@ -3,6 +3,7 @@ import nodemailer from "nodemailer";
 import { NextResponse } from "next/server";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 type ContactPayload = {
   name?: string;
@@ -37,6 +38,10 @@ function getTransporter() {
     auth: {
       user,
       pass,
+    },
+    requireTLS: !secure,
+    tls: {
+      minVersion: "TLSv1.2",
     },
   });
 }
@@ -202,6 +207,8 @@ Sent from the Auronex contact form. Replying to this email will go directly to t
 
 
 
+    await transporter.verify();
+
     await transporter.sendMail({
       from: `"Auronex" <${process.env.SMTP_USER}>`,
       to: destination,
@@ -217,8 +224,16 @@ Sent from the Auronex contact form. Replying to this email will go directly to t
   } catch (error) {
     console.error("Contact form email error:", error);
 
+    const message =
+      error instanceof Error ? error.message : "We could not send your message right now.";
+
     return NextResponse.json(
-      { message: "We could not send your message right now. Please try again." },
+      {
+        message:
+          process.env.NODE_ENV === "production"
+            ? `Mail send failed: ${message}`
+            : message,
+      },
       { status: 500 }
     );
   }
